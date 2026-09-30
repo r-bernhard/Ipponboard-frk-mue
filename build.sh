@@ -65,7 +65,7 @@ function create_default_env_cfg {
     local local_config="$1"
 
     cat > "$local_config" <<EOF_CFG
-set "LINUX_QTDIR=\$HOME/Qt/6.9.2/gcc_64"
+set "LINUX_QTDIR=/usr/lib/qt6"
 set "MACOS_QTDIR=\$HOME/Qt/6.9.2/macos"
 EOF_CFG
 }
