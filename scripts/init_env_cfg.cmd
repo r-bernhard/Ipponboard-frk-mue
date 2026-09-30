@@ -8,9 +8,10 @@ if exist "%LOCAL_CONFIG%" (
 ) else (
   echo @echo off > "%LOCAL_CONFIG%"
   echo :: Configure dependency paths below  >> "%LOCAL_CONFIG%"
-  echo set "IPPONBOARD_ROOT_DIR=c:\dev\_cpp\Ipponboard" >> "%LOCAL_CONFIG%"
-  echo set "QTDIR=C:\Qt\6.9.2\msvc2022_64" >> "%LOCAL_CONFIG%"  
-  echo set "INNO_DIR=c:\Program Files (x86)\Inno Setup 6" >> "%LOCAL_CONFIG%"
+  echo set "IPPONBOARD_ROOT_DIR=C:\dev\git\github\Ipponboard-frk-ralf-vNEXT" >> "%LOCAL_CONFIG%"
+  echo set "QTDIR=C:\dev\tools\qt-6.11.2-x64" >> "%LOCAL_CONFIG%"
+  echo set "INNO_DIR=C:\dev\tools\Inno Setup 7" >> "%LOCAL_CONFIG%"
+  echo set "CLANGFORMAT=C:\dev\tools\libclang_23.1.1-vs2022_64\bin\clang-format.exe" >> "%LOCAL_CONFIG%"
   echo Please configure dependency paths in "%LOCAL_CONFIG%" first!
   pause
   exit /b 1

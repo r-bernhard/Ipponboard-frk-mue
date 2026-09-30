@@ -84,7 +84,7 @@ endif()
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
- 
+
 if (MSVC)
     add_compile_options(/MP)
 endif()
@@ -92,6 +92,21 @@ endif()
 set(CMAKE_AUTOGEN_PARALLEL $ENV{NUMBER_OF_PROCESSORS})
 
 add_compile_definitions(QT_DISABLE_DEPRECATED_BEFORE=0x060900)
+
+# Qt installs whose CMake package exports only the Debug configuration silently
+# link debug Qt (/MDd) into Release builds, mixing CRT runtimes and corrupting
+# the heap at runtime. The imported targets are patched after all find_package
+# calls in the subdirectories have created them.
+#
+include(FixQtImportedConfigs REQUIRED)
+
+# Moving “find_package” to the top level places the imported Qt targets in the
+# root scope, making them visible throughout the project and allowing them to be
+# customized before a target includes them.
+
+find_package(Qt6 COMPONENTS Core Gui Widgets Network Multimedia PrintSupport REQUIRED)
+fix_qt_imported_configs("${QTDIR}")
+
 # Add targets
 add_subdirectory(gamepad ${CMAKE_BINARY_DIR}/build-Gamepad)
 add_subdirectory(core ${CMAKE_BINARY_DIR}/build-Core)
